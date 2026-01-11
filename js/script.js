@@ -1,4 +1,31 @@
 // ===================================
+// Profile Photo Loader
+// ===================================
+
+document.addEventListener('DOMContentLoaded', function() {
+    const profilePhoto = document.getElementById('profilePhoto');
+    const profilePlaceholder = document.getElementById('profilePlaceholder');
+
+    if (profilePhoto && profilePlaceholder) {
+        profilePhoto.addEventListener('load', function() {
+            profilePhoto.classList.add('loaded');
+            profilePlaceholder.classList.add('hidden');
+        });
+
+        profilePhoto.addEventListener('error', function() {
+            profilePhoto.style.display = 'none';
+            profilePlaceholder.classList.remove('hidden');
+        });
+
+        // Check if image is already cached and loaded
+        if (profilePhoto.complete && profilePhoto.naturalHeight !== 0) {
+            profilePhoto.classList.add('loaded');
+            profilePlaceholder.classList.add('hidden');
+        }
+    }
+});
+
+// ===================================
 // Mobile Navigation Toggle
 // ===================================
 
@@ -200,6 +227,48 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             }
         }
     });
+});
+
+// ===================================
+// CV Download Functionality
+// ===================================
+
+function downloadCV() {
+    // Check if CV is uploaded in localStorage
+    const uploadedCV = localStorage.getItem('uploadedCV');
+    const cvFileName = localStorage.getItem('cvFileName') || 'cv.pdf';
+
+    if (uploadedCV) {
+        // Download from localStorage
+        const link = document.createElement('a');
+        link.href = uploadedCV;
+        link.download = cvFileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    } else {
+        // Fallback to assets/cv.pdf
+        const link = document.createElement('a');
+        link.href = 'assets/cv.pdf';
+        link.download = 'cv.pdf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+}
+
+// Add event listeners to download buttons
+document.addEventListener('DOMContentLoaded', function() {
+    const downloadBtn1 = document.getElementById('downloadCVBtn');
+    const downloadBtn2 = document.getElementById('downloadCVBtn2');
+
+    if (downloadBtn1) {
+        downloadBtn1.addEventListener('click', downloadCV);
+    }
+
+    if (downloadBtn2) {
+        downloadBtn2.addEventListener('click', downloadCV);
+    }
 });
 
 // ===================================

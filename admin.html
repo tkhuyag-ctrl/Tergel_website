@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Admin panel for CV management">
+    <title>Admin | Tergel Khuyag</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Merriweather:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">Tergel Khuyag</a>
+                <button class="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="research.html">Research & Interests</a></li>
+                    <li><a href="coursework.html">Coursework & Skills</a></li>
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="cv.html">CV</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h1>Admin Panel</h1>
+                <p class="page-subtitle">Manage your website content</p>
+            </div>
+        </section>
+
+        <section class="content-section">
+            <div class="container container-narrow">
+
+                <!-- Login Form -->
+                <div id="loginSection" class="admin-section">
+                    <div class="admin-card">
+                        <h2>Admin Login</h2>
+                        <p>Enter your password to access the admin panel.</p>
+                        <form id="loginForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="password">Password <span class="required">*</span></label>
+                                <input type="password" id="password" name="password" required>
+                                <span class="error-message" id="passwordError"></span>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Admin Dashboard -->
+                <div id="adminDashboard" class="admin-section" style="display: none;">
+
+                    <div class="admin-header">
+                        <h2>Welcome, Admin</h2>
+                        <button id="logoutBtn" class="btn btn-secondary">Logout</button>
+                    </div>
+
+                    <!-- CV Upload Section -->
+                    <div class="admin-card">
+                        <h3>CV Management</h3>
+                        <p>Upload your CV (PDF format only, max 5MB)</p>
+
+                        <div class="cv-status" id="cvStatus">
+                            <p><strong>Current Status:</strong> <span id="cvStatusText">No CV uploaded</span></p>
+                            <p id="cvUploadDate" style="display: none;"><strong>Last Updated:</strong> <span id="cvDateText"></span></p>
+                        </div>
+
+                        <div class="upload-section">
+                            <input type="file" id="cvFileInput" accept=".pdf" style="display: none;">
+                            <button id="selectFileBtn" class="btn btn-primary">Select PDF File</button>
+                            <button id="uploadBtn" class="btn btn-secondary" style="display: none;">Upload CV</button>
+                            <button id="deleteBtn" class="btn btn-secondary" style="display: none; background-color: #e74c3c;">Delete CV</button>
+                        </div>
+
+                        <div id="fileInfo" style="display: none; margin-top: 1rem; padding: 1rem; background-color: var(--bg-secondary); border-radius: var(--radius-md);">
+                            <p><strong>Selected File:</strong> <span id="fileName"></span></p>
+                            <p><strong>File Size:</strong> <span id="fileSize"></span></p>
+                        </div>
+
+                        <div id="uploadSuccess" class="success-message" style="display: none; margin-top: 1rem;">
+                            CV uploaded successfully! It will now be available for download on your website.
+                        </div>
+
+                        <div id="uploadError" class="error-message" style="display: none; margin-top: 1rem;">
+                        </div>
+                    </div>
+
+                    <!-- Password Change Section -->
+                    <div class="admin-card">
+                        <h3>Change Admin Password</h3>
+                        <p>Update your admin password (leave blank to keep current password)</p>
+                        <form id="changePasswordForm" class="contact-form">
+                            <div class="form-group">
+                                <label for="currentPassword">Current Password <span class="required">*</span></label>
+                                <input type="password" id="currentPassword" name="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="newPassword">New Password <span class="required">*</span></label>
+                                <input type="password" id="newPassword" name="newPassword" required minlength="8">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm New Password <span class="required">*</span></label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Change Password</button>
+                            <div id="passwordSuccess" class="success-message" style="display: none; margin-top: 1rem;">
+                                Password changed successfully!
+                            </div>
+                            <div id="passwordError2" class="error-message" style="display: none; margin-top: 1rem;">
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Tergel Khuyag. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="mailto:tkhuyag@haverford.edu">Email</a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+                <a href="https://github.com/yourprofile" target="_blank">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>
